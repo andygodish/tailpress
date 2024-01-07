@@ -31,6 +31,8 @@ function tailpress_setup() {
 
 	add_theme_support( 'editor-styles' );
 	add_editor_style( 'css/editor-style.css' );
+
+	add_theme_support( 'widgets' );
 }
 
 add_action( 'after_setup_theme', 'tailpress_setup' );
@@ -107,3 +109,22 @@ function tailpress_nav_menu_add_submenu_class( $classes, $args, $depth ) {
 }
 
 add_filter( 'nav_menu_submenu_css_class', 'tailpress_nav_menu_add_submenu_class', 10, 3 );
+
+// Custom Image Sizes
+add_image_size('blog-large', 800, 400, true);
+add_image_size('blog-small', 300, 200, true);
+
+// Register Sidebars
+
+function my_sidebars()
+{
+	register_sidebar(
+		array(
+			'name' => 'Page Sidebar',
+			'id' => 'page-sidebar',
+			'before-title' => '<h4 class="widget-title">',
+			'after-title' => '</h4>'
+		)
+	);
+}
+add_action('widgets_init', 'my_sidebars');
